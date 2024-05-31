@@ -1,0 +1,33 @@
+.toolTip::before {
+	content: "";
+	width: 0%;
+	position: absolute;
+	bottom: 5%;
+	margin-inline: auto;
+	height: 10%;
+	background: white;
+	transform-origin: right;
+	animation: toLeft 3s linear;
+	border-radius: 0.5ch;
+}
+@keyframes toLeft {
+	from {
+		width: 90%;
+	}
+	to {
+		width: 0%;
+	}
+}
+.toolTip {
+	opacity: 0;
+	animation: hideIt 3s ease-in-out;
+}
+@keyframes hideIt {
+	0%,
+	90% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}

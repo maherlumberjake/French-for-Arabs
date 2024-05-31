@@ -51,7 +51,7 @@ export default function NavBar() {
 				</li>
 				<li>
 					<Link
-						href="/profile"
+						href="/signup"
 						className="hover:text-main transition-colors font-bold"
 					>
 						profile
