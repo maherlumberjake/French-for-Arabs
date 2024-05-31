@@ -3,10 +3,11 @@ import Image from "next/image";
 import { FormEvent, useState } from "react";
 import { convertToBase64 } from "../lib/Base64";
 import ToolTip from "@/components/toolTip/toolTIp";
-import { CustomAxiosError, axiosLocal } from "@/axiosConfig";
+import { CustomAxiosError, axiosLocal } from "../lib/axiosConfig";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-export default function Login() {
+export default function SignUp() {
 	const [encImage, setEncImage] = useState<string | null>();
 	const navigate = useRouter();
 	const [message, setMessage] = useState<string | null>();
@@ -43,7 +44,7 @@ export default function Login() {
 					await axiosLocal.post("/signUp", formDataObject);
 				console.log(res);
 				setMessage(res.message);
-				if (res.user && !message) {
+				if (res?.user && !message) {
 					setTimeout(() => {
 						navigate.replace("/");
 					}, 3000);
@@ -252,10 +253,17 @@ export default function Login() {
 					<input
 						disabled={sending}
 						type="submit"
-						value={sending ? "sending..." : "send"}
+						value={sending ? "sending..." : "Sign up"}
 						className="!bg-main !text-light !text-center font-bold  w-fit !rounded-sm cursor-pointer mx-auto"
 					/>
 				</div>
+				<Link
+					href="/logIn"
+					className="text-center col-span-2 underline mb-4 text-xl
+					 hover:text-main transition-colors"
+				>
+					Already have an account?
+				</Link>
 			</form>
 		</>
 	);

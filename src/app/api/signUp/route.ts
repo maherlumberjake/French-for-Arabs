@@ -31,7 +31,11 @@ export async function POST(req: NextRequest) {
 			console.log(user);
 			const SECRET = process.env.SECRET_STR as string;
 			const token = jwt.sign({ id: user._id }, SECRET);
-			cookies().set("token", token, { httpOnly: true });
+
+			cookies().set("token", token, {
+				httpOnly: true,
+				expires: 60000 * 60 * 24 * 15,
+			});
 			return NextResponse.json(
 				{ status: "success", user, message: "successfully signed up " },
 				{ status: 201 }

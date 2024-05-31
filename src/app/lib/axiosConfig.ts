@@ -7,7 +7,7 @@ export interface CustomAxiosError {
 
 export const axiosLocal = axios.create({
 	baseURL: "api",
-	timeout: 20000,
+	timeout: 40000,
 });
 axiosLocal.interceptors.response.use(
 	(res) => {

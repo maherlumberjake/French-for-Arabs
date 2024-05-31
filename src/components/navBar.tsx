@@ -1,9 +1,13 @@
 import Link from "next/link";
+import NavBarLinks from "./navBarLinks/navBarLinks";
 
 export default function NavBar() {
 	return (
-		<nav className=" sm:text-xl md:text-2xl md:py-4 flex justify-between py-2 px-4 md:px-8 sm:px-12 text-md items-center sticky">
-			<Link href="/">
+		<header className=" sm:text-xl md:text-2xl md:py-4 flex justify-between py-2 px-4 md:px-8 sm:px-12 text-md items-center sticky">
+			<Link
+				href="/"
+				title="home"
+			>
 				<svg
 					id="Layer_1"
 					data-name="Layer 1"
@@ -13,7 +17,6 @@ export default function NavBar() {
 					viewBox="0 0 1800 1800"
 					className=" dark:fill-light fill-dark hover:fill-main transition-colors"
 				>
-					<title>f4anextProject</title>
 					<path
 						d="M1898.35,752.3c0,48.8-15.72,90.75-46.72,124.66-30,32.83-66.76,49.47-109.23,49.47h-95.47l-58.25,173.76h95.76c37,0,66.27,10.89,86.93,32.38,22.21,23.07,33.46,56.26,33.46,98.64,0,49.42-15.71,91.69-46.71,125.61-30,32.82-66.75,49.46-109.23,49.46H1462.64c-52.13,0-95.86-17.14-130-51a177.28,177.28,0,0,1-40.8-62.18c-9.13-23.47-13.77-49.66-13.77-77.86,0-40.09,11.18-93,34.18-161.64l42.28-127.2h-144.4l-246,516.5c-62.33,131.47-132,232-207,298.65-77.08,68.56-161.62,103.31-251.28,103.31-98.8,0-184.49-39-255.15-116a337.83,337.83,0,0,0,127.58,47.9,387.44,387.44,0,0,0,61.62,4.8c57.17,0,111-11.88,161-35.46q64.2-30.24,119.82-86.12c39.65-39.88,76.49-90.26,109.51-149.71,32.65-58.82,62.51-128.21,88.73-206.32l142-425.24h141c34.66,0,65-11.55,90.47-34.39a157.81,157.81,0,0,0,11.73-11.7c28.28-31.27,42.62-70.19,42.62-115.64,0-5-.17-9.87-.51-14.57h156.92l135.21-404.26q25-11.48,45.54-34c28.6-31.3,43.1-69.62,43.1-113.91a165.53,165.53,0,0,0-1.56-23.14,122.29,122.29,0,0,0-12.79-40.78,96.5,96.5,0,0,0-22.42-28.11,99.71,99.71,0,0,0-16.07-11.19q33.71-2.16,69.72-2.17c40,0,72.73,11.73,97.29,34.88,26.75,25.25,40.89,61.72,40.89,105.51,0,19.67-3.78,41.07-11.55,65.43l0,.14-7,21.8L1749.07,620.34H1778c37.09,0,66.38,11,87.07,32.75C1887.13,676.31,1898.35,709.69,1898.35,752.3Z"
 						transform="translate(-98.35 -44.89)"
@@ -32,32 +35,7 @@ export default function NavBar() {
 					/>
 				</svg>
 			</Link>
-			<ul className="flex gap-4 sm:gap-12 ">
-				<li>
-					<Link
-						href="/quizzess"
-						className="hover:text-main transition-colors font-bold"
-					>
-						Quizzes
-					</Link>
-				</li>
-				<li>
-					<Link
-						href="/articles"
-						className="hover:text-main transition-colors font-bold"
-					>
-						Aricles
-					</Link>
-				</li>
-				<li>
-					<Link
-						href="/signup"
-						className="hover:text-main transition-colors font-bold"
-					>
-						profile
-					</Link>
-				</li>
-			</ul>
-		</nav>
+			<NavBarLinks />
+		</header>
 	);
 }

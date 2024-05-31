@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:disabled {
+	opacity: 0.85;
+}
+.active {
+	position: relative;
+	cursor: default;
+	&::before {
+		@apply dark:bg-light bg-dark rounded-sm;
+		width: 100%;
+		height: 15%;
+		content: "";
+		position: absolute;
+		bottom: -20%;
+	}
+}
