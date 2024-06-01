@@ -11,13 +11,11 @@ export const QuizSchema = new mongoose.Schema({
 		minLength: [5, "question cannot be less than 5ch"],
 	},
 	difficulty: {
-		type: Number,
-		default: 1,
-		max: 5,
+		type: String,
+		default: "newbie",
 	},
 	kind: {
-		type: [String],
-		minLength: 1,
+		type: String,
 	},
 	options: {
 		type: [String],
@@ -25,7 +23,7 @@ export const QuizSchema = new mongoose.Schema({
 	},
 	correct: {
 		type: String,
-		required: [true, "provice the answer correct"],
+		required: [true, "provide the answer correct"],
 	},
 	solvedBy: {
 		type: [mongoose.Types.ObjectId],

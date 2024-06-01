@@ -6,10 +6,13 @@ export function middleware(req: NextRequest) {
 		return Response.redirect(new URL("/articles", req.url));
 	} else if (userToken && req.nextUrl.pathname.startsWith("/logIn")) {
 		return Response.redirect(new URL("/articles", req.url));
-	} else if (!userToken && req.nextUrl.pathname.startsWith("/Profile")) {
+	} else if (
+		(!userToken && req.nextUrl.pathname.startsWith("/Profile")) ||
+		(!userToken && req.nextUrl.pathname.startsWith("/CreateQuiz"))
+	) {
 		return Response.redirect(new URL("/login", req.url));
 	}
 }
 export const config = {
-	matcher: ["/signup", "/logIn", "/Profile"],
+	matcher: ["/signup", "/logIn", "/Profile", "/CreateQuiz"],
 };

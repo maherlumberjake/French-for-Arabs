@@ -1,6 +1,6 @@
-export default function Lvl({ lvl }: { lvl: number }) {
+export default function Lvl({ lvl }: { lvl: string }) {
 	switch (lvl) {
-		case 1:
+		case "newbie":
 			return (
 				<span
 					className="border-2 text-sm sm:text-md p-1 
@@ -10,7 +10,7 @@ export default function Lvl({ lvl }: { lvl: number }) {
 					newbie
 				</span>
 			);
-		case 2:
+		case "intermediate":
 			return (
 				<span
 					className="border-2 text-sm sm:text-md p-1 
@@ -20,17 +20,17 @@ export default function Lvl({ lvl }: { lvl: number }) {
 					intermediate
 				</span>
 			);
-		case 3:
+		case "advanced":
 			return (
 				<span
 					className="border-2 text-sm sm:text-md p-1 
                 capitalize rounded-md border-current dark:text-yellow-500
                   text-purple-700 "
 				>
-					advanced{" "}
+					advanced
 				</span>
 			);
-		case 4:
+		case "expert":
 			return (
 				<span
 					className="border-2 text-sm sm:text-md p-1 
@@ -40,7 +40,7 @@ export default function Lvl({ lvl }: { lvl: number }) {
 					expert
 				</span>
 			);
-		case 5:
+		case "native":
 			return (
 				<span
 					className="border-2 text-sm sm:text-md p-1 

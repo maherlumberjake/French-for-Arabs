@@ -34,6 +34,9 @@ export default function SignUp() {
 			setTimeout(() => {
 				setMessage(null);
 			}, 3000);
+			setTimeout(() => {
+				navigate.refresh();
+			}, 3500);
 		} else {
 			const formDataObject = Object.fromEntries(data.entries());
 			// Add thumbnailImg property to the object

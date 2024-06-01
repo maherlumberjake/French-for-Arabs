@@ -1,14 +1,15 @@
 import { getProfile } from "../lib/getProfile";
 import Image from "next/image";
+import placeHolderImg from "../../../public/avatar.png";
 
 export default async function Profile() {
 	const res = await getProfile();
 	const user: User = await res?.json();
 	return (
 		<>
-			<div className="grid grid-cols-1  w-60 justify-center items-center gap-4 p-4 mx-auto border-4 border-main rounded-md">
+			<div className="grid grid-cols-1   min-w-60 max-w-96 justify-center items-center gap-4 p-4 mx-auto border-4 border-main rounded-md">
 				<Image
-					src={user.thumbnailImg}
+					src={user.thumbnailImg == "noImg" ? "/avatar.png" : user.thumbnailImg}
 					alt="user img"
 					loading="lazy"
 					width={200}

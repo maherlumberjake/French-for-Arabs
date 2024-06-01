@@ -26,6 +26,9 @@ export default function LogIn() {
 				setTimeout(() => {
 					navigate.replace("/");
 				}, 3000);
+				setTimeout(() => {
+					navigate.refresh();
+				}, 3500);
 			}
 		} catch (err) {
 			const error = err as CustomAxiosError;

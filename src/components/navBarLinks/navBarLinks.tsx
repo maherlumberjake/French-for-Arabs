@@ -19,20 +19,11 @@ export default function NavBarLinks() {
 					href="/articles"
 					className=" !text-dark dark:!text-light hover:!text-main transition-colors font-bold"
 				>
-					Aricles
+					Articles
 				</Link>
 			</li>
 			<li>
-				{cookies().get("token") ? (
-					<ProfileSnippet />
-				) : (
-					<Link
-						href="/signup"
-						className=" !text-dark dark:!text-light hover:!text-main transition-colors font-bold"
-					>
-						Sign up
-					</Link>
-				)}
+				<ProfileSnippet />
 			</li>
 		</ul>
 	);
