@@ -7,4 +7,5 @@ interface User {
 	confirmPassword: string;
 	thumbnailImg: string;
 	role: boolean;
+	solvedList: Quiz[];
 }
