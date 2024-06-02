@@ -1,9 +1,24 @@
 import Link from "next/link";
 
-export default function quizzess() {
+import QuizSnippet from "@/components/quizSnippet/quizSnippet";
+import { getAllQuizzes } from "../lib/actions/quizzes";
+
+export default async function quizzess() {
+	const data: Quiz[] | undefined = await getAllQuizzes();
 	return (
-		<div>
-			<h1>this is quizzess page</h1>
+		<>
+			{data && data.length > 0 ? (
+				<section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12">
+					{data.map((quiz: Quiz) => (
+						<QuizSnippet
+							key={quiz._id}
+							quiz={quiz}
+						/>
+					))}
+				</section>
+			) : (
+				<h2>no data to show</h2>
+			)}
 			<Link
 				href="/CreateQuiz"
 				className=" absolute bottom-10 right-10 w-fit hover:opacity-80 "
@@ -23,6 +38,6 @@ export default function quizzess() {
 					/>
 				</svg>
 			</Link>
-		</div>
+		</>
 	);
 }

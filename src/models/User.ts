@@ -40,6 +40,11 @@ export const UserSchema = new mongoose.Schema({
 		ref: "Quiz",
 		default: [],
 	},
+	owned : {
+		type : [mongoose.Types.ObjectId],
+		ref: "Quiz",
+		default : []
+	}
 });
 UserSchema.pre("save", async function (next) {
 	this.password = await bcrypt.hash(this.password, 10);

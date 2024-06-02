@@ -8,4 +8,5 @@ interface User {
 	thumbnailImg: string;
 	role: boolean;
 	solvedList: Quiz[];
+	owned: Quiz[];
 }

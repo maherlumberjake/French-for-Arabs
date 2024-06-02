@@ -1,42 +1,26 @@
-"use client";
+import SubmitButton from "@/components/submitButton/submitButton";
+import { createNew } from "../lib/actions/quizzes";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
-import { axiosLocal } from "@/app/lib/axiosConfig";
-import { FormEvent, useState } from "react";
-
-export default function CreateQuiz() {
-	const [sending, setSending] = useState<boolean>(false);
-	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-		setSending(true);
-		e.preventDefault();
-		const data = new FormData(e.target as HTMLFormElement);
-		const formDataObject = Object.fromEntries(data.entries());
-		const correct = data.get(data.get("correct") as string);
-		const quiz = {
-			...formDataObject,
-			options: [
-				data.get("option1"),
-				data.get("option2"),
-				data.get("option3"),
-				data.get("option4"),
-			],
-			correct,
-		};
+export default async function CreateQuiz() {
+	const create = async (e: FormData) => {
+		"use server";
 		try {
-			const res = await axiosLocal.post("/quizzes", quiz);
-			console.log(res);
+			await createNew(e);
 		} catch (error) {
 			console.log(error);
-		} finally {
-			setSending(false);
 		}
-	}
+		revalidatePath("/quizzess");
+		return redirect("/quizzess");
+	};
 	return (
 		<>
 			<form
 				className="grid grid-cols-1 mx-auto  justify-center items-center gap-4 p-4 *:grid
              *:grid-cols-2  max-w-2xl"
-				onSubmit={(e) => handleSubmit(e)}
 				method="post"
+				action={create}
 			>
 				<h1 className="text-xl sm:text-2xl text-main font-bold text-center sm:text-left">
 					Create new Quiz
@@ -215,12 +199,7 @@ export default function CreateQuiz() {
 						/>
 					</label>
 				</div>
-				<input
-					type="submit"
-					disabled={sending}
-					value={sending ? "sending" : "send"}
-					className=" bg-main text-light text-xl font-bold capitalize p-2 rounded-md hover:opacity-80 transition-colors my-8"
-				/>
+				<SubmitButton />
 			</form>
 		</>
 	);

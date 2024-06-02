@@ -15,7 +15,6 @@ export default function LogIn() {
 		e.preventDefault();
 		const data = new FormData(e.target as HTMLFormElement);
 		const formDataObject = Object.fromEntries(data.entries());
-		console.log(formDataObject);
 		try {
 			setMessage(null);
 			const res: { status: string; message: string; user: User } =

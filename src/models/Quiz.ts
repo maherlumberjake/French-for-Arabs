@@ -30,6 +30,10 @@ export const QuizSchema = new mongoose.Schema({
 		ref: "User",
 		default: [],
 	},
+	owner: {
+		type: mongoose.Types.ObjectId,
+		ref: "User",
+	},
 });
 
 export const QuizModel = models.Quiz || mongoose.model("Quiz", QuizSchema);

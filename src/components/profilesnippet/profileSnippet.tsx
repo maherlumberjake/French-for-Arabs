@@ -1,14 +1,14 @@
 import { Suspense } from "react";
-import { getProfile } from "@/app/lib/getProfile";
 import Image from "next/image";
 import Link from "next/link";
 import placeHolderImg from "../../../public/avatar.png";
+import { getProfile } from "@/app/lib/actions/users";
 
 export default async function ProfileSnippet() {
 	let user: User | undefined = undefined;
 	try {
-		const res = await getProfile();
-		user = await res?.json();
+		user = await getProfile();
+
 		if (!user?.name) {
 			user = undefined;
 		}
