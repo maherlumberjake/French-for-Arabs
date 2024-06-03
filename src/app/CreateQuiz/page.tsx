@@ -145,7 +145,26 @@ export default async function CreateQuiz() {
 					className="dark:bg-light dark:text-dark bg-dark text-light p-2  rounded-md
                 *:outline-none  *:border-none *:placeholder:text-slate-500 grid-cols-subgrid *:mb-2 gap-4"
 				>
-					<h2 className=" col-span-2 text-main font-bold text-xl">Options</h2>
+					<h2 className=" col-span-2 text-main font-bold text-xl ">
+						Options
+						<span className="text-sm ml-4 dark:text-dark text-light font-normal">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								strokeWidth={1.5}
+								stroke="currentColor"
+								className="size-6 inline text-main"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+								/>
+							</svg>
+							note : if each item is not unique this quiz will not be added
+						</span>
+					</h2>
 					<label
 						htmlFor="option1"
 						className="text-main"
@@ -157,6 +176,7 @@ export default async function CreateQuiz() {
 							required
 							name="option1"
 							placeholder="option 1"
+							className="text-light dark:text-dark w-full"
 						/>
 					</label>
 					<label
@@ -170,6 +190,7 @@ export default async function CreateQuiz() {
 							required
 							name="option2"
 							placeholder="option 2"
+							className="text-light dark:text-dark w-full"
 						/>
 					</label>
 					<label
@@ -183,6 +204,7 @@ export default async function CreateQuiz() {
 							required
 							name="option3"
 							placeholder="option 3"
+							className="text-light dark:text-dark w-full"
 						/>
 					</label>
 					<label
@@ -196,6 +218,7 @@ export default async function CreateQuiz() {
 							required
 							name="option4"
 							placeholder="option 4"
+							className="text-light dark:text-dark w-full"
 						/>
 					</label>
 				</div>
