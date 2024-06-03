@@ -5,6 +5,8 @@ import { getAllQuizzes } from "../lib/actions/quizzes";
 
 export default async function quizzess() {
 	const data: Quiz[] | undefined = await getAllQuizzes();
+	// console.log(data);
+	// console.log(data?.slice(0, 2));
 	return (
 		<>
 			{data && data.length > 0 ? (
@@ -21,7 +23,7 @@ export default async function quizzess() {
 			)}
 			<Link
 				href="/CreateQuiz"
-				className=" absolute bottom-10 right-10 w-fit hover:opacity-80 "
+				className=" sticky bottom-10 right-10 w-fit hover:opacity-80 "
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"

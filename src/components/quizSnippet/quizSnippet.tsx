@@ -5,7 +5,28 @@ export default function QuizSnippet({ quiz }: { quiz: Quiz }) {
 	return (
 		<Link href={`/quizzess/${quiz._id}`}>
 			<div className="flex flex-col gap-2 sm:gap-4 shadow-sm  shadow-slate-500 p-2 hover:scale-105 transition-transform">
-				<h2 className="text-main text-lg sm:text-xl">{quiz.title}</h2>
+				<div className="flex justify-between">
+					<h2 className="text-main text-lg sm:text-xl capitalize">
+						{quiz.title}
+					</h2>
+
+					{quiz.solved && (
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							strokeWidth={1.5}
+							stroke="currentColor"
+							className="size-6 text-green-500"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								d="m4.5 12.75 6 6 9-13.5"
+							/>
+						</svg>
+					)}
+				</div>
 				<p>{quiz.question}</p>
 				<div className="flex justify-between gap-4 w-full items-center">
 					<Lvl lvl={quiz.difficulty} />

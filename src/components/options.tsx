@@ -40,7 +40,7 @@ export default function Options({
 						key={index}
 						onClick={() => setSelected(opts[index])}
 						className={`border-2 border-alt p-1 rounded-md 
-									cursor-pointer capitalize hover:scale-105 transition-transform ${
+									cursor-pointer  hover:scale-105 transition-transform ${
 										opt === selected ? "border-green-500" : "border-alt"
 									}`}
 					>
@@ -50,7 +50,7 @@ export default function Options({
 			</div>
 			<button
 				onClick={checkResult}
-				className=" w-fit ml-auto bg-main text-white p-2 rounded-sm hover:opacity-85"
+				className=" w-fit ml-auto bg-main text-white p-2 rounded-md hover:opacity-85 capitalize"
 			>
 				check
 			</button>

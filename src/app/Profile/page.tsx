@@ -1,5 +1,8 @@
+import SolvedList from "@/components/SolvedList/SolvedList";
 import { getProfile } from "../lib/actions/users";
 import Image from "next/image";
+import { Suspense } from "react";
+import LoadingPage from "@/components/loadingPage/loadingPage";
 
 export default async function Profile() {
 	let user: User | undefined = undefined;
@@ -33,6 +36,14 @@ export default async function Profile() {
 					</span>
 				</div>
 			)}
+			<h1 className="text-main text-2xl sm:text-4xl my-5">Solved List : </h1>
+			<Suspense fallback={<LoadingPage />}>
+				{user?._id && (
+					<section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12 my-10">
+						<SolvedList id={user?._id} />
+					</section>
+				)}
+			</Suspense>
 		</>
 	);
 }

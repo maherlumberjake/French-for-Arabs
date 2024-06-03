@@ -6,6 +6,7 @@ interface Quiz {
 	kind: string[];
 	options: string[];
 	correct: string;
-	solvedBy: User[];
+	solvedBy: User[] | string[];
 	owner: User;
+	solved: boolean;
 }

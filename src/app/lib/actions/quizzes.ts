@@ -4,8 +4,9 @@ import { QuizModel } from "@/models/Quiz";
 import { cookies } from "next/headers";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { UserModel } from "@/models/User";
-import { Types } from "mongoose";
+
 const SECRET = process.env.SECRET_STR as string;
+
 export async function createNew(form: FormData) {
 	await connectMongo();
 	const data = form;
@@ -24,24 +25,38 @@ export async function createNew(form: FormData) {
 
 	const compareSet = new Set(rawquiz.options);
 	if (rawquiz.options.length != compareSet.size) {
-		return { error: "Options must be unique." };
+		return { message: "Options must be unique." };
 	}
 	try {
 		const quiz = await QuizModel.create(rawquiz);
 		return { quiz, message: "created successfully" };
 	} catch (error) {
-		return { error, message: "failed" };
+		console.log(error);
+		return { message: "failed" };
 	}
 }
 export async function getAllQuizzes() {
 	try {
 		await connectMongo();
-		const quizzes: Quiz[] = await QuizModel.find();
-		return quizzes;
+		const token = cookies().get("token")?.value as string;
+		const decoded = jwt.verify(token, SECRET) as JwtPayload;
+		const user = (await UserModel.findById(decoded.id)) as User;
+		const quizzes: Quiz[] = await QuizModel.find().lean();
+		const modifedQuizzess = quizzes.map((quiz) => {
+			const modified = { ...quiz, solved: false };
+			quiz.solvedBy.map((el) => {
+				if (user._id.toString() == el.toString()) {
+					modified.solved = true;
+				}
+			});
+			return modified;
+		});
+		return modifedQuizzess;
 	} catch (error) {
 		console.log(error);
 	}
 }
+
 export async function getQuiz(id: string) {
 	try {
 		await connectMongo();
@@ -52,6 +67,7 @@ export async function getQuiz(id: string) {
 		console.log(error);
 	}
 }
+
 export async function Solve(quizID: string, result: boolean) {
 	try {
 		await connectMongo();
@@ -63,7 +79,6 @@ export async function Solve(quizID: string, result: boolean) {
 			const quiz = (await QuizModel.findById(quizID)) as Quiz;
 			let user = (await UserModel.findById(userId)) as User;
 			const alreadyExsist = user.solvedList.filter((e) => e == quizID);
-			console.log(alreadyExsist);
 			let quizresult = 0;
 			if (result && alreadyExsist.length == 0) {
 				switch (quiz.difficulty) {
@@ -109,4 +124,12 @@ export async function Solve(quizID: string, result: boolean) {
 	} catch (error) {
 		console.log(error);
 	}
+}
+
+export async function getLikeList(id: string) {
+	try {
+		await connectMongo();
+		const user = await UserModel.findById(id).populate("solvedList");
+		return user.solvedList;
+	} catch (error) {}
 }
