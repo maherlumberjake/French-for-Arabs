@@ -4,7 +4,7 @@ export default function NotFound() {
 	return (
 		<div className="grid items-center h-full mt-20 justify-center">
 			<h1 className="text-center text-2xl sm:text-4xl">
-				Sorry ! the page you are looking for is not found
+				Sorry ! the page you are looking for was not found
 			</h1>
 			<Image
 				src={notFound}

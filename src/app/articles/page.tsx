@@ -1,6 +1,6 @@
 export default function Articles() {
 	return (
-		<div>
+		<div className="relative">
 			<h1>this is articles page</h1>
 		</div>
 	);
