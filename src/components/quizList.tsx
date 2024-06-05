@@ -1,34 +1,20 @@
 import Link from "next/link";
 
 import QuizSnippet from "@/components/quizSnippet/quizSnippet";
-import { getAllQuizzes } from "../lib/actions/quizzes";
-import Pagination from "@/components/pagination/pagination";
 
-export default async function quizzess({
-	searchParams,
-}: {
-	searchParams: { page: string };
-}) {
-	console.log(searchParams);
-	const res: { data: Quiz[]; total: number } | undefined = await getAllQuizzes(
-		parseInt(searchParams.page)
-	);
-	const data = res?.data;
+import { getAllQuizzes } from "@/app/lib/actions/quizzes";
 
+export default async function QuizList(props: { page: number }) {
+	const res: { total: number; data: Quiz[] } = await getAllQuizzes(props.page);
+	const data = res.data;
 	return (
 		<>
-			{res && res?.total > 1 && (
-				<Pagination
-					total={res?.total}
-					page={parseInt(searchParams.page)}
-				/>
-			)}
 			{data && data.length > 0 ? (
 				<section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12">
 					{data.map((quiz: Quiz) => (
 						<QuizSnippet
 							key={quiz._id}
-							quiz={quiz}
+							quiz={JSON.parse(JSON.stringify(quiz))}
 						/>
 					))}
 				</section>

@@ -8,7 +8,7 @@ export default function NavBarLinks() {
 		<ul className="flex gap-4 sm:gap-12  items-center">
 			<li>
 				<Link
-					href="/quizzess"
+					href="/quizzess?page=1"
 					className=" !text-dark dark:!text-light hover:!text-main transition-colors font-bold"
 				>
 					Quizzes

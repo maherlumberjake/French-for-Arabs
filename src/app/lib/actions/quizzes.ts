@@ -35,13 +35,19 @@ export async function createNew(form: FormData) {
 		return { message: "failed" };
 	}
 }
-export async function getAllQuizzes() {
+export async function getAllQuizzes(page?: number) {
 	try {
 		await connectMongo();
 		const token = cookies().get("token")?.value as string;
 		const decoded = jwt.verify(token, SECRET) as JwtPayload;
 		const user = (await UserModel.findById(decoded.id)) as User;
-		const quizzes: Quiz[] = await QuizModel.find().lean();
+		const quizzesCursor = QuizModel.find();
+		const limit = 6;
+		if (page) {
+			const skip = (page - 1) * limit;
+			quizzesCursor.skip(skip).limit(limit);
+		}
+		const quizzes = (await quizzesCursor.lean()) as Quiz[];
 		const modifedQuizzess = quizzes.map((quiz) => {
 			const modified = { ...quiz, solved: false };
 			quiz.solvedBy.map((el) => {
@@ -51,7 +57,8 @@ export async function getAllQuizzes() {
 			});
 			return modified;
 		});
-		return modifedQuizzess;
+		const total = await QuizModel.find().countDocuments();
+		return { data: modifedQuizzess, total };
 	} catch (error) {
 		console.log(error);
 	}
